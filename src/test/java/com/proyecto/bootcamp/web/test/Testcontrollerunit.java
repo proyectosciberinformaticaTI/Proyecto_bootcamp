@@ -137,105 +137,64 @@ public class Testcontrollerunit {
 	@Test
 	public void listidparents() {
 
-
-		client
-		.get()
-		.uri("/index/consultaid/"+"{id}", 
-		Collections.singletonMap("id", "5dadfe34f30b3c23ec3c61ef"))
-		.accept(MediaType.APPLICATION_JSON_UTF8)
-		.exchange().expectStatus()
-		.isOk().expectHeader()
-		.contentType(MediaType.APPLICATION_JSON_UTF8).expectBody(Parents.class);
+		client.get().uri("/index/consultaid/" + "{id}", Collections.singletonMap("id", "5dadfe34f30b3c23ec3c61ef"))
+				.accept(MediaType.APPLICATION_JSON_UTF8).exchange().expectStatus().isOk().expectHeader()
+				.contentType(MediaType.APPLICATION_JSON_UTF8).expectBody(Parents.class);
 
 	}
 
 	@Test
 	public void createstudent() {
 
-		Parents parent = new Parents("5dadfe34f30b3c23ec3c61ef","Test","m",new Date(),"DNI","483585389","cibertec","estudiante");
+		Parents parent = new Parents("5dadfe34f30b3c23ec3c61ef", "Test", "m", new Date(), "DNI", "483585389",
+				"cibertec", "estudiante");
 
-	
-	
 		client.post().uri("/index/create").contentType(MediaType.APPLICATION_JSON_UTF8)
 				.accept(MediaType.APPLICATION_JSON_UTF8).body(Mono.just(parent), Parents.class).exchange()
-				.expectStatus().is5xxServerError().expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8).expectBody()
-				.jsonPath("$.complementName",is("test"));
+				.expectStatus().is5xxServerError().expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+				.expectBody().jsonPath("$.complementName", is("test"));
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@Test
 	public void createstudent2() {
 
-		Parents parent = new Parents("5dadfe34f30b3c23ec3c61ef","Joel","m",new Date(),"DNI","483585389","cibertec","estudiante");
+		Parents parent = new Parents("5dadfe34f30b3c23ec3c61ef", "Joel", "m", new Date(), "DNI", "483585389",
+				"cibertec", "estudiante");
 
-	
-	
 		client.post().uri("/index/create").contentType(MediaType.APPLICATION_JSON_UTF8)
 				.accept(MediaType.APPLICATION_JSON_UTF8).body(Mono.just(parent), Parents.class).exchange()
-				.expectStatus().is5xxServerError().expectHeader()
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
-				.expectBody(new ParameterizedTypeReference<LinkedHashMap<String, Object>>() {})
-				.consumeWith(response -> {
-				Assert.assertEquals("mensaje esperado", HttpStatus.SC_INTERNAL_SERVER_ERROR, response.getStatus().value());
-					
+				.expectStatus().is5xxServerError().expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+				.expectBody(new ParameterizedTypeReference<LinkedHashMap<String, Object>>() {
+				}).consumeWith(response -> {
+					Assert.assertEquals("mensaje esperado", HttpStatus.SC_INTERNAL_SERVER_ERROR,
+							response.getStatus().value());
+
 				});
 	}
 
-	
-	
-	
-	
-	
-	
-
 	@Test
 	public void eliminarTest() {
-	
-		client.delete().uri("/index/eliminarstudent/" + "{id}","5dadfe34f30b3c23ec3c61ef")
-				.exchange().expectStatus().isNoContent().expectBody(Void.class);
 
-		client.get().uri("/index/consultaid/{id}","5dadfe34f30b3c23ec3c61ef").exchange()
-				.expectStatus().isNotFound().expectBody().isEmpty();
+		client.delete().uri("/index/eliminarstudent/" + "{id}", "5dadfe34f30b3c23ec3c61ef").exchange().expectStatus()
+				.isNoContent().expectBody(Void.class);
+
+		client.get().uri("/index/consultaid/{id}", "5dadfe34f30b3c23ec3c61ef").exchange().expectStatus().isNotFound()
+				.expectBody().isEmpty();
 	}
-	
-	
-	
+
 	@Test
 	public void actualizar() {
-		
-		
-		Parents parent = new Parents("5dadfe34f30b3c23ec3c61eg","Joel","m",new Date(),"DNI","483585389","cibertec","estudiante");
 
-		client.put().uri("/{id}","5dadfe34f30b3c23ec3c61ef")
-		.contentType(MediaType.APPLICATION_JSON_UTF8)
-		.accept(MediaType.APPLICATION_JSON_UTF8)
-		.body(Mono.just(parent), Parents.class)
-		.exchange()
-		.expectStatus().isCreated()
-		.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
-		.expectBody()
-		.jsonPath("$._id").isNotEmpty();
-		
-		
+		Parents parent = new Parents("5dadfe34f30b3c23ec3c61eg", "Joel", "m", new Date(), "DNI", "483585389",
+				"cibertec", "estudiante");
+
+		client.put().uri("/{id}", "5dadfe34f30b3c23ec3c61ef").contentType(MediaType.APPLICATION_JSON_UTF8)
+				.accept(MediaType.APPLICATION_JSON_UTF8).body(Mono.just(parent), Parents.class).exchange()
+				.expectStatus().isCreated().expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8).expectBody()
+				.jsonPath("$._id").isNotEmpty();
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
