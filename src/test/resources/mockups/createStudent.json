@@ -1,0 +1,29 @@
+{
+        "_id": "5db87808f30b3c0c8ca93d91",
+        "complementName": "tttttgg",
+        "sex": "Femenino",
+        "dateBirth": "2019-10-29T17:34:00.185+0000",
+        "typeidentify": "DNI",
+        "numberidentify": "25",
+        "parents": [
+            {
+                "_id": "5daf5ae5f30b3c4374353a33",
+                "complementName": "Maria",
+                "sex": "Femenino",
+                "dateBirth": "2019-10-29T17:34:00.185+0000",
+                "typeidentify": "DNI",
+                "numberidentify": "24242",
+                "relacion": "padre"
+            },
+            {
+                "_id": "5daf5ae5f30b3c4374353a39",
+                "complementName": "Maria",
+                "sex": "Femenino",
+                "dateBirth": "2019-10-29T17:34:00.185+0000",
+                "typeidentify": "DNI",
+                "numberidentify": "24242",
+                "relacion": "madre"
+            }
+        ],
+        "stpar": null
+    }
